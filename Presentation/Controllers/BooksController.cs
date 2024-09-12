@@ -1,35 +1,37 @@
 ﻿using Entities.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using Repositories.Contracts;
-using Repositories.EFCore;
+using Services.Contracts;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace WebApi.Controllers
+namespace Presentation.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/books")]
     public class BooksController : ControllerBase
     {
-        private readonly IRepositoryManager _manager;
-        public BooksController(IRepositoryManager manager)
+        private readonly IServiceManager _manager;
+        public BooksController(IServiceManager manager)
         {
-            _manager=manager;
+            _manager = manager;
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            var books = _manager.Book.GetAllBooks(false);
+            var books = _manager.BookService.GetAllBooks(false);
             return Ok(books);
         }
 
         [HttpGet("{id:int}")]
-        public IActionResult GetOneBook([FromRoute(Name="id")] int id)
+        public IActionResult GetOneBook([FromRoute(Name = "id")] int id)
         {
             try
             {
-                var book = _manager.Book.GetOneBookById(id,false);
+                var book = _manager.BookService.GetOneBookById(id, false);
 
                 if (book == null)
                 {
@@ -54,9 +56,8 @@ namespace WebApi.Controllers
                 {
                     return BadRequest();
                 }
-                _manager.Book.CreateOneBook(book);
-                _manager.Save();
-                return StatusCode(201,book);
+                _manager.BookService.CreateOneBook(book);
+                return StatusCode(201, book);
             }
             catch (Exception ex)
             {
@@ -67,22 +68,16 @@ namespace WebApi.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public IActionResult UpdateOneBook([FromRoute(Name="id")] int id, [FromBody] Book book )
+        public IActionResult UpdateOneBook([FromRoute(Name = "id")] int id, [FromBody] Book book)
         {
             try
             {
-                var entity = _manager.Book.GetOneBookById(id,false); //güncellenecek kitabın bilgisini çekiyoruz
-
-                if(entity == null)
-                    return NotFound();
-
-                if (id != book.Id)
+                if (book == null)
                     return BadRequest();
 
-                entity.Title = book.Title;
-                entity.Price = book.Price;  //Sonraki aşamada Mapperlarla yapılacak
-                _manager.Save();
-                return Ok(book);
+                _manager.BookService.UpdateOneBook(id, book, true); //güncellenecek kitabın bilgisini çekiyoruz
+
+                return NoContent();
             }
             catch (Exception ex)
             {
