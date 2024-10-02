@@ -17,6 +17,7 @@ builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.ConfigureRepositoryManager(); //tek parametre içerir ve thisi içerdiði için yazýlmaz
 builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureLoggerManager();
+builder.Services.AddAutoMapper(typeof(Program));
 
 
 var app = builder.Build();

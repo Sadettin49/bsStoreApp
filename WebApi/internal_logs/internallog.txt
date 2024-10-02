@@ -22,3 +22,15 @@
 2024-09-30 10:55:06.8480 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.3.2683. Product version: 5.3.3+341c753ad4dce4dd476dcf0bc3ff2cfd9db76493. GlobalAssemblyCache: False
 2024-09-30 10:55:06.8592 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\sadet\source\repos\Sadettin49\bsStoreApp\WebApi\nlog.config
 2024-09-30 10:55:06.8727 Info Configuration initialized.
+2024-10-01 17:28:33.8048 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-10-01 17:28:33.8415 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.3.2683. Product version: 5.3.3+341c753ad4dce4dd476dcf0bc3ff2cfd9db76493. GlobalAssemblyCache: False
+2024-10-01 17:28:33.8415 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\sadet\source\repos\Sadettin49\bsStoreApp\WebApi\nlog.config
+2024-10-01 17:28:33.8615 Info Configuration initialized.
+2024-10-01 17:35:15.8251 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-10-01 17:35:15.8476 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.3.2683. Product version: 5.3.3+341c753ad4dce4dd476dcf0bc3ff2cfd9db76493. GlobalAssemblyCache: False
+2024-10-01 17:35:15.8579 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\sadet\source\repos\Sadettin49\bsStoreApp\WebApi\nlog.config
+2024-10-01 17:35:15.8579 Info Configuration initialized.
+2024-10-01 17:35:55.8812 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-10-01 17:35:55.8927 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.3.2683. Product version: 5.3.3+341c753ad4dce4dd476dcf0bc3ff2cfd9db76493. GlobalAssemblyCache: False
+2024-10-01 17:35:55.8927 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\sadet\source\repos\Sadettin49\bsStoreApp\WebApi\nlog.config
+2024-10-01 17:35:55.9069 Info Configuration initialized.

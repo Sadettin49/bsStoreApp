@@ -1,4 +1,5 @@
-﻿using Entities.Models;
+﻿using Entities.Exceptions;
+using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contracts;
 using System;
@@ -29,61 +30,31 @@ namespace Presentation.Controllers
         [HttpGet("{id:int}")]
         public IActionResult GetOneBook([FromRoute(Name = "id")] int id)
         {
-            try
-            {
-                var book = _manager.BookService.GetOneBookById(id, false);
-
-                if (book == null)
-                {
-                    return NotFound();
-                }
-                return Ok(book);
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception(ex.Message);
-            }
-
+            var book = _manager.BookService.GetOneBookById(id, false);
+            if (book == null)
+                throw new BookNotFoundException(id);
+            return Ok(book);
         }
 
         [HttpPost]
         public IActionResult CreateOneBook([FromBody] Book book)
         {
-            try
+            if (book == null)
             {
-                if (book == null)
-                {
-                    return BadRequest();
-                }
-                _manager.BookService.CreateOneBook(book);
-                return StatusCode(201, book);
+                return BadRequest();
             }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-
+            _manager.BookService.CreateOneBook(book);
+            return StatusCode(201, book);
         }
 
         [HttpPut("{id:int}")]
         public IActionResult UpdateOneBook([FromRoute(Name = "id")] int id, [FromBody] Book book)
         {
-            try
-            {
-                if (book == null)
-                    return BadRequest();
-
-                _manager.BookService.UpdateOneBook(id, book, true); //güncellenecek kitabın bilgisini çekiyoruz
-
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-
+            if (book == null)
+                return BadRequest();
+            _manager.BookService.UpdateOneBook(id, book, true); //güncellenecek kitabın bilgisini çekiyoruz
+            return NoContent();
         }
     }
 }
+
