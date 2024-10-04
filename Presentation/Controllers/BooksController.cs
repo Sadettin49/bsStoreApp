@@ -38,13 +38,12 @@ namespace Presentation.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateOneBook([FromBody] Book book)
+        public IActionResult CreateOneBook([FromBody] BookDtoForInsertion bookDto)
         {
-            if (book == null)
-            {
+            if (bookDto == null)
                 return BadRequest();
-            }
-            _manager.BookService.CreateOneBook(book);
+
+            var book =_manager.BookService.CreateOneBook(bookDto);
             return StatusCode(201, book);
         }
 
@@ -55,6 +54,10 @@ namespace Presentation.Controllers
                 return BadRequest();
             _manager.BookService.UpdateOneBook(id, bookDto, true); //güncellenecek kitabın bilgisini çekiyoruz
             return NoContent();
+
+
+
+
         }
     }
 }

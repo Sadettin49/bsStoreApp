@@ -7,6 +7,14 @@ using WebApi.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(),"/nlog.config"));
 
+builder.Services.AddControllers(config =>
+{
+    config.RespectBrowserAcceptHeader = true; //apinin içerik pazarlýðýna açýk olduðunu söyledik xml/json
+    config.ReturnHttpNotAcceptable = true; //formatýn yalnýzca json olarak dönmesine izin verdi (kod:406)
+})
+    .AddCustomCsvFormatter()  // text/csv formatýnda çalýþýr 
+    .AddXmlDataContractSerializerFormatters(); //formatýn xml olarakta çalýþmasýný saðlar
+
 // Add services to the container.
 
 builder.Services.AddControllers().AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly).AddNewtonsoftJson();
