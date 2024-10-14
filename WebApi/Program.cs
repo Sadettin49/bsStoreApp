@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NLog;
 using Repositories.EFCore;
@@ -13,7 +14,14 @@ builder.Services.AddControllers(config =>
     config.ReturnHttpNotAcceptable = true; //formatýn yalnýzca json olarak dönmesine izin verdi (kod:406)
 })
     .AddCustomCsvFormatter()  // text/csv formatýnda çalýþýr 
-    .AddXmlDataContractSerializerFormatters(); //formatýn xml olarakta çalýþmasýný saðlar
+    .AddXmlDataContractSerializerFormatters() //formatýn xml olarakta çalýþmasýný saðlar
+    .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly)
+    .AddNewtonsoftJson();
+
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+options.SuppressModelStateInvalidFilter = true;
+});
 
 // Add services to the container.
 
