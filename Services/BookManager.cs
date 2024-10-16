@@ -47,15 +47,15 @@ namespace Services
 
         }
 
-        public IEnumerable<BookDto> GetAllBooks(bool trackChanges)
+        public async Task<IEnumerable<BookDto>> GetAllBooksAsync(bool trackChanges)
         {
-            var books = _manager.Book.GetAllBooks(trackChanges);
+            var books = await _manager.Book.GetAllBooksAsync(trackChanges);
             return _mapper.Map<IEnumerable<BookDto>>(books);
         }
 
-        public BookDto GetOneBookById(int id, bool trackChanges)
+        public async Task<BookDto> GetOneBookByIdAsync(int id, bool trackChanges)
         {
-            var book = _manager.Book.GetOneBookById(id,trackChanges);
+            var book = _manager.Book.GetOneBookByIdAsync(id,trackChanges);
             if (book == null)
                 throw new BookNotFoundException(id);
             return _mapper.Map<BookDto>(book);
@@ -63,7 +63,7 @@ namespace Services
 
         public void UpdateOneBook(int id, BookDtoForUpdate bookDto, bool trackChanges)
         {
-            var entity = _manager.Book.GetOneBookById(id, trackChanges);
+            var entity = _manager.Book.GetOneBookByIdAsync(id, trackChanges);
             if (entity == null)
             {
                 string message = $"The book with:{id} could not found.";
