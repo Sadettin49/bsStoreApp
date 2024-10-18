@@ -14,8 +14,8 @@ namespace Services.Contracts
         Task<IEnumerable<BookDto>> GetAllBooksAsync(bool trackChanges);
         Task<BookDto> GetOneBookByIdAsync(int id,bool trackChanges);
         Task<BookDto> CreateOneBookAsync(BookDtoForInsertion book);
-        void UpdateOneBook(int id,BookDtoForUpdate bookDto,bool trackChanges);
-        void DeleteOneBook(int id,bool trackChanges);
+        Task UpdateOneBookAsync(int id,BookDtoForUpdate bookDto,bool trackChanges);
+        Task DeleteOneBookAsync(int id,bool trackChanges);
 
     }
 }
