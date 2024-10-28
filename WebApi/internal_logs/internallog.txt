@@ -136,3 +136,27 @@
 2024-10-18 13:01:59.1637 Info Configuration initialized.
 2024-10-18 17:29:51.8367 Info AppDomain Shutting down. LogFactory closing...
 2024-10-18 17:29:51.8490 Info LogFactory has been closed.
+2024-10-21 10:19:04.1592 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-10-21 10:19:04.2059 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.3.2683. Product version: 5.3.3+341c753ad4dce4dd476dcf0bc3ff2cfd9db76493. GlobalAssemblyCache: False
+2024-10-21 10:19:04.2190 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\sadet\source\repos\Sadettin49\bsStoreApp\WebApi\nlog.config
+2024-10-21 10:19:04.2332 Info Configuration initialized.
+2024-10-21 10:25:15.2249 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-10-21 10:25:15.2464 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.3.2683. Product version: 5.3.3+341c753ad4dce4dd476dcf0bc3ff2cfd9db76493. GlobalAssemblyCache: False
+2024-10-21 10:25:15.2560 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\sadet\source\repos\Sadettin49\bsStoreApp\WebApi\nlog.config
+2024-10-21 10:25:15.2656 Info Configuration initialized.
+2024-10-21 10:25:46.2847 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-10-21 10:25:46.3088 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.3.2683. Product version: 5.3.3+341c753ad4dce4dd476dcf0bc3ff2cfd9db76493. GlobalAssemblyCache: False
+2024-10-21 10:25:46.3187 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\sadet\source\repos\Sadettin49\bsStoreApp\WebApi\nlog.config
+2024-10-21 10:25:46.3327 Info Configuration initialized.
+2024-10-21 10:27:44.0496 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-10-21 10:27:44.0831 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.3.2683. Product version: 5.3.3+341c753ad4dce4dd476dcf0bc3ff2cfd9db76493. GlobalAssemblyCache: False
+2024-10-21 10:27:44.1007 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\sadet\source\repos\Sadettin49\bsStoreApp\WebApi\nlog.config
+2024-10-21 10:27:44.1266 Info Configuration initialized.
+2024-10-28 12:23:22.9082 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-10-28 12:23:22.9438 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.3.2683. Product version: 5.3.3+341c753ad4dce4dd476dcf0bc3ff2cfd9db76493. GlobalAssemblyCache: False
+2024-10-28 12:23:22.9552 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\sadet\source\repos\Sadettin49\bsStoreApp\WebApi\nlog.config
+2024-10-28 12:23:22.9552 Info Configuration initialized.
+2024-10-28 12:30:54.0025 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-10-28 12:30:54.0209 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.3.2683. Product version: 5.3.3+341c753ad4dce4dd476dcf0bc3ff2cfd9db76493. GlobalAssemblyCache: False
+2024-10-28 12:30:54.0301 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\sadet\source\repos\Sadettin49\bsStoreApp\WebApi\nlog.config
+2024-10-28 12:30:54.0301 Info Configuration initialized.
