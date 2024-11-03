@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+ï»¿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NLog;
 using Presentation.ActionFilters;
@@ -7,15 +7,15 @@ using Services.Contracts;
 using WebApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(),"/nlog.config"));
+LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
 builder.Services.AddControllers(config =>
 {
-    config.RespectBrowserAcceptHeader = true; //apinin içerik pazarlýðýna açýk olduðunu söyledik xml/json
-    config.ReturnHttpNotAcceptable = true; //formatýn yalnýzca json olarak dönmesine izin verdi (kod:406)
+    config.RespectBrowserAcceptHeader = true; //apinin iÃ§erik pazarlÃ½Ã°Ã½na aÃ§Ã½k olduÃ°unu sÃ¶yledik xml/json
+    config.ReturnHttpNotAcceptable = true; //formatÃ½n yalnÃ½zca json olarak dÃ¶nmesine izin verdi (kod:406)
 })
-    .AddCustomCsvFormatter()  // text/csv formatýnda çalýþýr 
-    .AddXmlDataContractSerializerFormatters() //formatýn xml olarakta çalýþmasýný saðlar
+    .AddCustomCsvFormatter()  // text/csv formatÃ½nda Ã§alÃ½Ã¾Ã½r 
+    .AddXmlDataContractSerializerFormatters() //formatÃ½n xml olarakta Ã§alÃ½Ã¾masÃ½nÃ½ saÃ°lar
     .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly)
     .AddNewtonsoftJson();
 
@@ -23,7 +23,7 @@ builder.Services.AddControllers(config =>
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
-options.SuppressModelStateInvalidFilter = true;
+    options.SuppressModelStateInvalidFilter = true;
 });
 
 // Add services to the container.
@@ -33,11 +33,12 @@ builder.Services.AddControllers().AddApplicationPart(typeof(Presentation.Assembl
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.ConfigureSqlContext(builder.Configuration);
-builder.Services.ConfigureRepositoryManager(); //tek parametre içerir ve thisi içerdiði için yazýlmaz
+builder.Services.ConfigureRepositoryManager(); //tek parametre iÃ§erir ve thisi iÃ§erdiÃ°i iÃ§in yazÃ½lmaz
 builder.Services.ConfigureServiceManager();
-builder.Services.ConfigureLoggerManager();
+builder.Services.ConfigureLoggerService();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.ConfigureActionFilters();
+builder.Services.ConfigureCors();
 
 var app = builder.Build();
 
@@ -56,6 +57,8 @@ if (app.Environment.IsProduction())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
 

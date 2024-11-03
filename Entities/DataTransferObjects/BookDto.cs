@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Entities.DataTransferObjects
 {
     //public record BookDto(int Id,String Title,decimal Price);
-    public class BookDto
+    public record BookDto
     {
         public int Id { get; init; }
         public String Title { get; init; }
