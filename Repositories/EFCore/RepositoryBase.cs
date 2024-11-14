@@ -20,7 +20,7 @@ namespace Repositories.EFCore
         }
 
         public void Create(T entity) => _context.Set<T>().Add(entity);
-
+        
         public void Delete(T entity) => _context.Set<T>().Remove(entity);
 
         public IQueryable<T> FindAll(bool trackChanges) =>
@@ -34,7 +34,7 @@ namespace Repositories.EFCore
             _context.Set<T>().Where(expression).AsNoTracking() :
             _context.Set<T>().Where(expression);
 
-        public void Update(T entity) => _context.Set<T>().Update(entity);
-
+        public void Update(T entity) => _context.Set<T>().Update(entity);   
+       
     }
 }

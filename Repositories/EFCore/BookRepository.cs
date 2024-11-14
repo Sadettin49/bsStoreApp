@@ -2,7 +2,7 @@
 using Entities.RequestFeatures;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Contracts;
-using Repositories.EFCore.Extentions;
+using Repositories.EFCore.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace Repositories.EFCore
 {
-    public sealed class BookRepository : RepositoryBase<Book>, IBookRepository  //sealed sayesinde bu sınıf üzerinden bir değişlik mümkün olmayacak bu işi extentionslar yapacak
+    public sealed class BookRepository : RepositoryBase<Book>, IBookRepository
     {
         public BookRepository(RepositoryContext context) : base(context)
         {
-
+            
         }
 
         public void CreateOneBook(Book book) => Create(book);
@@ -24,14 +24,14 @@ namespace Repositories.EFCore
             bool trackChanges)
         {
             var books = await FindAll(trackChanges)
-                .FilterBooks(bookParameters.MinPrice,bookParameters.MaxPrice)
+                .FilterBooks(bookParameters.MinPrice, bookParameters.MaxPrice)
                 .Search(bookParameters.SearchTerm)
                 .Sort(bookParameters.OrderBy)
                 .ToListAsync();
 
             return PagedList<Book>
-                .ToPagedList(books,
-                bookParameters.PageNumber,
+                .ToPagedList(books, 
+                bookParameters.PageNumber, 
                 bookParameters.PageSize);
         }
 

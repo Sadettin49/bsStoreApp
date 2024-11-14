@@ -26,17 +26,26 @@ namespace Presentation.Controllers
             _manager = manager;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetAllBooksAsync")]
+        [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
         public async Task<IActionResult> GetAllBooksAsync([FromQuery] BookParameters bookParameters)
         {
-            var pagedResult = await _manager
+            var linkParameters = new LinkParameters()
+            {
+                BookParameters = bookParameters,
+                HttpContext = HttpContext
+            };
+
+            var result = await _manager
                 .BookService
-                .GetAllBooksAsync(bookParameters, false);
+                .GetAllBooksAsync(linkParameters, false);
 
-            Response.Headers.Add("X-Pagination",
-                JsonSerializer.Serialize(pagedResult.metaData));
+            Response.Headers.Add("X-Pagination", 
+                JsonSerializer.Serialize(result.metaData));
 
-            return Ok(pagedResult.books);
+            return result.linkResponse.HasLinks ?
+                Ok(result.linkResponse.LinkedEntities) :
+                Ok(result.linkResponse.ShapedEntities);
         }
 
         [HttpGet("{id:int}")]
@@ -45,7 +54,7 @@ namespace Presentation.Controllers
             var book = await _manager
             .BookService
             .GetOneBookByIdAsync(id, false);
-
+            
             return Ok(book);
         }
 
@@ -57,7 +66,7 @@ namespace Presentation.Controllers
             return StatusCode(201, book); // CreatedAtRoute()
         }
 
-
+        
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPut("{id:int}")]
         public async Task<IActionResult> UpdateOneBookAsync([FromRoute(Name = "id")] int id,
@@ -93,7 +102,7 @@ namespace Presentation.Controllers
                 return UnprocessableEntity(ModelState);
 
             await _manager.BookService.SaveChangesForPatchAsync(result.bookDtoForUpdate, result.book);
-
+          
             return NoContent(); // 204
         }
     }

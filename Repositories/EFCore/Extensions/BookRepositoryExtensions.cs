@@ -1,14 +1,9 @@
 ﻿using Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Linq.Dynamic.Core;
 
-namespace Repositories.EFCore.Extentions
+namespace Repositories.EFCore.Extensions
 {
     public static class BookRepositoryExtensions
     {
@@ -18,7 +13,7 @@ namespace Repositories.EFCore.Extentions
             book.Price >= minPrice &&
             book.Price <= maxPrice);
 
-        public static IQueryable<Book> Search(this IQueryable<Book> books,
+        public static IQueryable<Book> Search(this IQueryable<Book> books, 
             string searchTerm)
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
@@ -31,7 +26,7 @@ namespace Repositories.EFCore.Extentions
                 .Contains(searchTerm));
         }
 
-        public static IQueryable<Book> Sort(this IQueryable<Book> books,
+        public static IQueryable<Book> Sort(this IQueryable<Book> books, 
             string orderByQueryString)
         {
             if (string.IsNullOrWhiteSpace(orderByQueryString))
@@ -40,7 +35,7 @@ namespace Repositories.EFCore.Extentions
             var orderQuery = OrderQueryBuilder
                 .CreateOrderQuery<Book>(orderByQueryString);
 
-            if (orderByQueryString==null)
+            if (orderQuery is null)
                 return books.OrderBy(b => b.Id);
 
             return books.OrderBy(orderQuery);
