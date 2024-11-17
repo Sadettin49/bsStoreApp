@@ -1,7 +1,9 @@
 ﻿using AspNetCoreRateLimit;
 using AutoMapper;
 using Entities.DataTransferObjects;
+using Entities.Models;
 using Marvin.Cache.Headers;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
@@ -19,13 +21,13 @@ namespace WebApi.Extensions
             IConfiguration configuration) => services.AddDbContext<RepositoryContext>(options =>
                     options.UseSqlServer(configuration.GetConnectionString("sqlConnection")));
 
-        public static void ConfigureRepositoryManager(this IServiceCollection services) => 
+        public static void ConfigureRepositoryManager(this IServiceCollection services) =>
             services.AddScoped<IRepositoryManager, RepositoryManager>();
 
         public static void ConfigureServiceManager(this IServiceCollection services) =>
             services.AddScoped<IServiceManager, ServiceManager>();
 
-        public static void ConfigureLoggerService(this IServiceCollection services) => 
+        public static void ConfigureLoggerService(this IServiceCollection services) =>
             services.AddSingleton<ILoggerService, LoggerManager>();
 
 
@@ -34,13 +36,13 @@ namespace WebApi.Extensions
             services.AddScoped<ValidationFilterAttribute>();
             services.AddSingleton<LogFilterAttribute>();
             services.AddScoped<ValidateMediaTypeAttribute>();
-        } 
+        }
 
         public static void ConfigureCors(this IServiceCollection services)
         {
             services.AddCors(options =>
             {
-                options.AddPolicy("CorsPolicy", builder => 
+                options.AddPolicy("CorsPolicy", builder =>
                     builder.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader()
@@ -117,6 +119,20 @@ namespace WebApi.Extensions
             services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
         }
 
+        public static void ConfigureIdentity(this IServiceCollection services)
+        {
+            var builder = services.AddIdentity<User, IdentityRole>(opts =>
+            {
+                opts.Password.RequireDigit = true;
+                opts.Password.RequireLowercase = false;
+                opts.Password.RequireUppercase = false;
+                opts.Password.RequireNonAlphanumeric = false;
+                opts.Password.RequiredLength = 6;
 
+                opts.User.RequireUniqueEmail = true;
+            })
+                .AddEntityFrameworkStores<RepositoryContext>()
+                .AddDefaultTokenProviders();
+        }
     }
 }

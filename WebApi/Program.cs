@@ -16,6 +16,7 @@ builder.Services.AddControllers(config =>
 {
     config.RespectBrowserAcceptHeader = true;
     config.ReturnHttpNotAcceptable = true;
+    config.CacheProfiles.Add("5mins", new CacheProfile() { Duration = 300 });
 })
 .AddXmlDataContractSerializerFormatters()
 .AddCustomCsvFormatter()
@@ -35,7 +36,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
-builder.Services.ConfigureLoggerService(); //yorum
+builder.Services.ConfigureLoggerService();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.ConfigureActionFilters();
 builder.Services.ConfigureCors();
@@ -47,6 +48,8 @@ builder.Services.ConfigureHttpCacheHeaders();
 builder.Services.AddMemoryCache();
 builder.Services.ConfigureRateLimitingOptions();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddAuthentication();
+builder.Services.ConfigureIdentity();
 
 
 
@@ -75,6 +78,8 @@ app.UseCors("CorsPolicy");
 app.UseResponseCaching();
 
 app.UseHttpCacheHeaders();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
